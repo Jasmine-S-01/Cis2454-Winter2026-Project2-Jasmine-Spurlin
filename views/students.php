@@ -49,7 +49,7 @@
                 <th>Major</th>
                 <th>ID</th>
             </tr>
-            <?php foreach ($students as $students) : ?>
+            <?php foreach ($all_students as $students) : ?>
                 <tr>
                     <td><?php echo $students->get_name(); ?></td>
                     <td><?php echo $students->get_major(); ?></td>
@@ -77,8 +77,6 @@
         <h3>Delete Student</h3>
         <form action="students.php" method="post">
              <?php include("studentViewDropDown.php"); ?>
-            <label>ID:</label> 
-            <input type="text" name="id"/>
             <input type="hidden" name='action' value='delete'/>
             <label>&nbsp;</label>
             <input type="submit" value="Delete Student"/> 

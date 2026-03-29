@@ -57,7 +57,7 @@ function get_students($id){
     
     $statement->closeCursor();
     
-    return new User($students['name'], $students['major'], $students['id']);
+    return new students($students['name'], $students['major'], $students['id']);
     
 }
 
@@ -73,15 +73,15 @@ function list_students() {
     $statement->execute();
 
     // this might be risky if you have HUGE amounts of data
-    $students = $statement->fetchAll();
+    $data = $statement->fetchAll();
     
     $statement->closeCursor();
     
     $students_array = array();
 
-    foreach ($students as $students) {
-        $students_array[] = new students($students['name'], $students['major'], $students['id']);
-    }
+    foreach ($data as $row) {
+    $students_array[] = new students($row['name'], $row['major'], $row['id']);
+}   
 
     return $students_array;
 }

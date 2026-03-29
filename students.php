@@ -29,7 +29,7 @@ try {
     }
 
 
-    $students = list_students();
+    $all_students = list_students();
 
     include('views/students.php');
 } catch (Exception $e) {
