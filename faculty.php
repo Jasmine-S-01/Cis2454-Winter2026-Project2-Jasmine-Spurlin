@@ -29,7 +29,7 @@ try {
     }
 
 
-    $faculty = list_faculty();
+    $facultys = list_faculty();
 
     include('views/faculty.php');
 } catch (Exception $e) {

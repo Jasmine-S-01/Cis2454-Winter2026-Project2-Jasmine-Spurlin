@@ -62,8 +62,6 @@
         </br>
         <h3>Add or Update Enrollment</h3>
         <form action="enrollment.php" method="post"> 
-            <label>Id:</label> 
-            <input type="number" name="id"/><br> 
             <label>Student Code:</label> 
             <input type="number" name="student_code"/><br> 
             <label>Section Id:</label> 

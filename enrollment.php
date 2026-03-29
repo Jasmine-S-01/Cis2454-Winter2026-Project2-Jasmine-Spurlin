@@ -41,6 +41,6 @@ $enrollment = list_enrollments();
 $sections = list_sections();
 $students = list_students();
 include ('views/enrollment.php');
-//CRUD Create Update Read Delete
+
 
 ?>

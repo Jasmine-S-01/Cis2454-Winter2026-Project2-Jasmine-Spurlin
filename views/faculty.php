@@ -46,10 +46,10 @@
         <table>
             <tr>
                 <th>ID</th>
-                <th>Name
+                <th>Name</th>
                 <th>Email</th>
             </tr>
-            <?php foreach ($faculty as $faculty) : ?>
+            <?php foreach ($facultys as $faculty) : ?>
                 <tr>
                     <td><?php echo $faculty->get_id(); ?></td>
                     <td><?php echo $faculty->get_name(); ?></td>
@@ -60,9 +60,7 @@
         </table>
         </br>
         <h3>Add or Update Faculty</h3>
-        <form action="faculty.php" method="post">
-            <label>ID:</label> 
-            <input type="text" name="id"/><br> 
+        <form action="faculty.php" method="post"> 
             <label>Name:</label> 
             <input type="text" name="name"/><br> 
             <label>Email:</label> 
@@ -76,8 +74,7 @@
         </br>
         <h3>Delete Faculty</h3>
         <form action="faculty.php" method="post"> 
-            <label>ID:</label> 
-            <input type="text" name="id"/>
+            <?php include("facultyViewDropDown.php"); ?>
             <input type="hidden" name='action' value='delete'/>
             <label>&nbsp;</label>
             <input type="submit" value="Delete Faculty"/></br>

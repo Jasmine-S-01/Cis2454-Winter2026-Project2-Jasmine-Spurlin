@@ -1,7 +1,8 @@
-<?php
-
-/* 
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHP.php to edit this template
- */
-
+<select name="id">
+    <option value="">-- Select a Faculty --</option>
+    <?php foreach ($facultys as $faculty) : ?>
+    <option value="<?php echo $faculty->get_id(); ?>">
+    ID <?php echo $faculty->get_id(); ?> - <?php echo $faculty->get_name(); ?>
+    </option>
+<?php endforeach; ?>
+</select>

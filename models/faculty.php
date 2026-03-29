@@ -71,16 +71,16 @@ function list_faculty() {
     // run the query please
     $statement->execute();
 
-    // this might be risky if you have HUGE amounts of data
-    $faculty = $statement->fetchAll();
+    
+    $rows = $statement->fetchAll();
     
     $statement->closeCursor();
     
     $faculty_array = array();
 
-    foreach ($faculty as $faculty) {
-        $faculty_array[] = new faculty($faculty['name'], $faculty['email'], $faculty['id']);
-    }
+    foreach ($rows as $row) {
+    $faculty_array[] = new faculty($row['name'], $row['email'], $row['id']);
+}
 
     return $faculty_array;
 }

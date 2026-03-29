@@ -42,6 +42,6 @@ $sections = list_sections();
 $courses = list_courses();
 $faculties = list_faculty();
 include ('views/section.php');
-//CRUD Create Update Read Delete
+
 
 ?>

@@ -62,10 +62,8 @@
         </br>
         <h3>Add or Update Section</h3>
         <form action="section.php" method="post"> 
-            <label>Id:</label> 
-            <input type="number" name="id"/><br> 
             <label>Course Code:</label> 
-            <input type="text" name="course_code"/><br> 
+            <input type="number" name="course_code"/><br> 
             <label>Faculty Id:</label> 
             <input type="number" name="faculty_id"/><br> 
             <label>Semester:</label> 
