@@ -7,12 +7,12 @@ try {
     $action = htmlspecialchars(filter_input(INPUT_POST, "action"));
 
     $name = htmlspecialchars(filter_input(INPUT_POST, "name"));
-    $major = filter_input(INPUT_POST, "major");
+    $email = htmlspecialchars(filter_input(INPUT_POST, "email"));
     $id = filter_input(INPUT_POST, "id", FILTER_VALIDATE_INT);
 
-    if ($action == "insert_or_update" && $name != "" && $major != "") {
+    if ($action == "insert_or_update" && $name != "" && $email != "") {
         $insert_or_update = filter_input(INPUT_POST, 'insert_or_update');
-        $faculty = new Students($name, $major, $id);
+        $faculty = new faculty($name, $email, $id);
         if ($insert_or_update == "insert") {
             insert_faculty($faculty);
         } else if ($insert_or_update == "update") {
@@ -24,7 +24,7 @@ try {
         delete_faculty($id);
         header("Location: faculty.php");
     } else if ($action != "") {
-        $error_message = "Missing name, or cash balance";
+        $error_message = "Missing name or email address.";
         include('views/error.php');
     }
 

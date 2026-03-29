@@ -10,6 +10,22 @@ class faculty {
         $this->set_name($name);
         $this->set_email($email);
     }
+    
+    public function set_name($name) {
+        $this->name = $name;
+    }
+    
+     public function get_name() {
+        return $this->name;
+    }
+    
+     public function get_email() {
+        return $this->email;
+    }
+
+    public function set_email($email) {
+        $this->email = $email;
+    }
 
     public function set_id($id) {
         $this->id = $id;
@@ -17,23 +33,6 @@ class faculty {
 
     public function get_id() {
         return $this->id;
-    }
-
-    public function get_name() {
-        return $this->name;
-    }
-
-    public function get_email() {
-        return $this->email;
-    }
-
-
-    public function set_name($name) {
-        $this->name = $name;
-    }
-
-    public function set_email($email) {
-        $this->email = $email;
     }
 
 }
@@ -57,7 +56,7 @@ function get_faculty($id){
     
     $statement->closeCursor();
     
-    return new User($faculty['name'], $faculty['email'], $faculty['id']);
+    return new faculty($faculty['name'], $faculty['email'], $faculty['id']);
     
 }
 

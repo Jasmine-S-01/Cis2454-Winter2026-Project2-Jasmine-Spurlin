@@ -25,7 +25,7 @@
             <?php endforeach; ?>
         </table>
         </br>
-        <h2>Add or Update User</h2>
+        <h2>Add or Update Faculty</h2>
         <form action="faculty.php" method="post"> 
             <label>Name:</label> 
             <input type="text" name="name"/><br> 
@@ -40,13 +40,13 @@
             <input type="submit" value="Submit"/> 
         </form>
         </br>
-        <h2>Delete User</h2>
+        <h2>Delete Faculty</h2>
         <form action="faculty.php" method="post"> 
             <label>ID:</label> 
             <input type="text" name="id"/><br> 
             <input type="hidden" name='action' value='delete'/>
             <label>&nbsp;</label>
-            <input type="submit" value="Delete Faculty/> 
+            <input type="submit" value="Delete Faculty"/></br>
         </form>
     </body>
     </br>
