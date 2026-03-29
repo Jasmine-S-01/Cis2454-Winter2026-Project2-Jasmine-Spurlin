@@ -45,6 +45,27 @@ class Course {
 
 }
 
+function get_courses($code){
+    global $database;
+
+    $query = 'SELECT `code`, `name`, `description`, `credits` FROM `course`';
+
+    // prepare the query please
+    $statement = $database->prepare($query);
+    
+    $statement->bindValue(":code", $code);
+
+    // run the query please
+    $statement->execute();
+
+    // this might be risky if you have HUGE amounts of data
+    $course = $statement->fetch();
+
+    $statement->closeCursor();
+   
+    return new Course($course['code'], $course['name'], $course['description'], $course['credits']);
+}
+
 function list_courses() {
     global $database;
 
@@ -71,5 +92,62 @@ function list_courses() {
     return $course_array;
 }
 
+
+function insert_courses($course) {
+    global $database;
+
+    // DANGER DANGER DANGER - SQL Injection risk
+    // Don't ever just plug values into a query!
+    //$query = "INSERT INTO stocks (symbol, name, current_price) "
+    //        . "VALUES ($symbol, $name, $current_price)";
+    // instead, use substitutions
+    $query = "INSERT INTO `course`(`code`, `name`, `description`, `credits`)"
+            . "VALUES (:code, :name, :description, :credits )";
+
+    // value binding in PDO protects against sql injection
+    $statement = $database->prepare($query);
+    $statement->bindValue(":code", $course->get_code());
+    $statement->bindValue(":name", $course->get_name());
+    $statement->bindValue(":description", $course->get_description());
+    $statement->bindValue(":credits", $course->get_credits());
+
+
+    $statement->execute();
+
+    $statement->closeCursor();
+}
+
+function update_course($course) {
+    global $database;
+
+    $query = "update course set code = :name, description = :description "
+            . " where credits = :credits";
+
+    // value binding in PDO protects against sql injection
+    $statement = $database->prepare($query);
+    $statement->bindValue(":code", $course->get_code());
+    $statement->bindValue(":name", $course->get_name());
+    $statement->bindValue(":description", $course->get_description());
+    $statement->bindValue(":credits", $course->get_credits());
+
+    $statement->execute();
+
+    $statement->closeCursor();
+}
+
+function delete_stock($course) {
+    global $database;
+
+    $query = "delete from course "
+            . " where code = :code";
+
+    // value binding in PDO protects against sql injection
+    $statement = $database->prepare($query);
+    $statement->bindValue(":code", $course->get_symbol());
+
+    $statement->execute();
+
+    $statement->closeCursor();
+}
 
 

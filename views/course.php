@@ -45,11 +45,11 @@
         </form>
         </br>
         <h2>Delete Courses</h2>
-        <form action="stocks.php" method="post"> 
-            <?php include("stockSymbolDropDown.php"); ?>
+        <form action="course.php" method="post"> 
+            <?php include("courseViewDropDown.php"); ?>
             <input type="hidden" name='action' value='delete'/>
             <label>&nbsp;</label>
-            <input type="submit" value="Delete Stock"/> 
+            <input type="submit" value="Delete Course"/> 
         </form>
     </body>
     </br>
