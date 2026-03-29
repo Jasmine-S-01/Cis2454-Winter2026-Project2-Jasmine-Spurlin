@@ -48,7 +48,7 @@ class Course {
 function get_courses($code){
     global $database;
 
-    $query = 'SELECT `code`, `name`, `description`, `credits` FROM `course`';
+    $query = 'SELECT `code`, `name`, `description`, `credits` FROM `course` WHERE code = :code';
 
     // prepare the query please
     $statement = $database->prepare($query);
@@ -120,8 +120,9 @@ function insert_courses($course) {
 function update_course($course) {
     global $database;
 
-    $query = "update course set code = :name, description = :description "
-            . " where credits = :credits";
+    $query = "UPDATE course 
+              SET name = :name, description = :description, credits = :credits 
+              WHERE code = :code";
 
     // value binding in PDO protects against sql injection
     $statement = $database->prepare($query);

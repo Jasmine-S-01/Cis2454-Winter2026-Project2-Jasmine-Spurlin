@@ -29,13 +29,13 @@
         <h2>Add or Update Courses</h2>
         <form action="course.php" method="post"> 
             <label>Code:</label> 
-            <input type="text" name="code"/><br> 
+            <input type="number" name="code"/><br> 
             <label>Name:</label> 
             <input type="text" name="name"/><br> 
             <label>Description:</label> 
             <input type="text" name="description"/><br> 
             <label>Credits:</label> 
-            <input type="text" name="credits"/><br> 
+            <input type="number" name="credits"/><br> 
             
             <input type="hidden" name='action' value='insert_or_update'/>
             <input type="radio" name="insert_or_update" value="insert" checked>Add

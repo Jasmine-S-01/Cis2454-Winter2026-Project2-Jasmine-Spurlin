@@ -5,6 +5,7 @@ require_once 'models/course.php';
 
 $action = htmlspecialchars(filter_input(INPUT_POST, "action"));
 
+
 $code = filter_input(INPUT_POST, "code");
 $name = htmlspecialchars(filter_input(INPUT_POST, "name"));
 $description = htmlspecialchars(filter_input(INPUT_POST, "description"));
@@ -19,7 +20,7 @@ if ($action == "insert_or_update" && $code != "" && $name != "" && $description 
     if ($insert_or_update == "insert") {
         insert_courses($course);
     } else if ($insert_or_update == "update") {
-        update_stock($course);
+        update_course($course);
     }
 
     header("Location: course.php");
@@ -29,7 +30,7 @@ if ($action == "insert_or_update" && $code != "" && $name != "" && $description 
     delete_course($course);
     header("Location: course.php");
 } else if ($action != "") {
-    $error_message = "Missing symbol, name, or current price";
+    $error_message = "Missing code, name, description, or credits";
     include('views/error.php');
 }
 
