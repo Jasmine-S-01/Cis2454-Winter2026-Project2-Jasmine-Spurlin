@@ -36,7 +36,7 @@ if ($action == "insert_or_update" && $code != "" && $name != "" && $description 
 }
 
 
-$courses = list_courses();
+$courses = list_sections();
 
 include ('views/section.php');
 //CRUD Create Update Read Delete

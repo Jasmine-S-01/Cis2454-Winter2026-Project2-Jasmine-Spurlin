@@ -12,14 +12,14 @@
         <table>
             <tr>
                 <th>Id</th>
-                <th>section_id</th>
+                <th>course_code</th>
                 <th>faculty_id</th>
                 <th>semester</th>
             </tr>
             <?php foreach ($sections as $section) : ?>
                 <tr>
                     <td><?php echo $section->get_id(); ?></td>
-                    <td><?php echo $section->get_section_id(); ?></td>
+                    <td><?php echo $section->get_course_code(); ?></td>
                     <td><?php echo $section->get_faculty_id(); ?></td>
                     <td><?php echo $section->get_semester(); ?></td>
                 </tr>
@@ -31,8 +31,8 @@
         <form action="section.php" method="post"> 
             <label>Id:</label> 
             <input type="number" name="id"/><br> 
-            <label>section_id:</label> 
-            <input type="text" name="section_id:"/><br> 
+            <label>course_code:</label> 
+            <input type="text" name="course_code"/><br> 
             <label>faculty_id:</label> 
             <input type="number" name="faculty_id"/><br> 
             <label>semester:</label> 

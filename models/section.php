@@ -2,11 +2,11 @@
 
 class Section {
 
-    private $id, $section_id, $faculty_id , $semester ;
+    private $id, $course_code, $faculty_id , $semester;
 
-    public function __construct($id, $section_id, $faculty_id , $semester ) {
+    public function __construct($id, $course_code, $faculty_id , $semester ) {
         $this->set_id($id);
-        $this->set_section_id($section_id);
+        $this->set_course_code($course_code);
         $this->set_faculty_id($faculty_id );
        $this->set_semester($semester );
     }
@@ -19,12 +19,12 @@ class Section {
         return $this->id;
     }
 
-    public function get_section_id() {
-        return $this->section_id;
+    public function get_course_code() {
+        return $this->course_code;
     }
 
-    public function set_section_id($section_id) {
-        $this->section_id = $section_id;
+    public function set_course_code($course_code) {
+        $this->course_code = $course_code;
     }
     
     public function get_faculty_id() {
@@ -48,7 +48,7 @@ class Section {
 function get_sections($id){
     global $database;
 
-    $query = 'SELECT `id`, `section_id`, `faculty_id`, `semester` FROM `section` WHERE id = :id';
+    $query = 'SELECT `id`, `course_code`, `faculty_id`, `semester` FROM `section` WHERE id = :id';
 
     // prepare the query please
     $statement = $database->prepare($query);
@@ -63,13 +63,13 @@ function get_sections($id){
 
     $statement->closeCursor();
    
-    return new Section($section['id'], $section['section_id'], $section['faculty_id'], $section['semester']);
+    return new Section($section['id'], $section['course_code'], $section['faculty_id'], $section['semester']);
 }
 
 function list_sections() {
     global $database;
 
-    $query = 'SELECT `id`, `section_id`, `faculty_id`, `semester` FROM `section`';
+    $query = 'SELECT `id`, `course_code`, `faculty_id`, `semester` FROM `section`';
 
     // prepare the query please
     $statement = $database->prepare($query);
@@ -86,7 +86,7 @@ function list_sections() {
 
    foreach ($section as $section) {
  
-        $section_array[] = new Section($section['id'], $section['section_id'], $section['faculty_id'], $section['semester']);
+        $section_array[] = new Section($section['id'], $section['course_code'], $section['faculty_id'], $section['semester']);
     }
 
     return $section_array;
@@ -98,16 +98,16 @@ function insert_sections($section) {
 
     // DANGER DANGER DANGER - SQL Injection risk
     // Don't ever just plug values into a query!
-    //$query = "INSERT INTO stocks (symbol, section_id, current_price) "
-    //        . "VALUES ($symbol, $section_id, $current_price)";
+    //$query = "INSERT INTO stocks (symbol, course_code, current_price) "
+    //        . "VALUES ($symbol, $course_code, $current_price)";
     // instead, use substitutions
-    $query = "INSERT INTO `section`(`id`, `section_id`, `faculty_id`, `semester`)"
-            . "VALUES (:id, :section_id, :faculty_id, :semester )";
+    $query = "INSERT INTO `section`(`id`, `course_code`, `faculty_id`, `semester`)"
+            . "VALUES (:id, :course_code, :faculty_id, :semester )";
 
     // value binding in PDO protects against sql injection
     $statement = $database->prepare($query);
     $statement->bindValue(":id", $section->get_id());
-    $statement->bindValue(":section_id", $section->get_section_id());
+    $statement->bindValue(":course_code", $section->get_course_code());
     $statement->bindValue(":faculty_id", $section->get_faculty_id());
     $statement->bindValue(":semester", $section->get_semester());
 
@@ -121,13 +121,13 @@ function update_section($section) {
     global $database;
 
     $query = "UPDATE section 
-              SET section_id = :section_id, faculty_id = :faculty_id, semester = :semester 
+              SET course_code = :course_code, faculty_id = :faculty_id, semester = :semester 
               WHERE id = :id";
 
     // value binding in PDO protects against sql injection
     $statement = $database->prepare($query);
     $statement->bindValue(":id", $section->get_id());
-    $statement->bindValue(":section_id", $section->get_section_id());
+    $statement->bindValue(":course_code", $section->get_course_code());
     $statement->bindValue(":faculty_id", $section->get_faculty_id());
     $statement->bindValue(":semester", $section->get_semester());
 
