@@ -96,17 +96,12 @@ function list_sections() {
 function insert_sections($section) {
     global $database;
 
-    // DANGER DANGER DANGER - SQL Injection risk
-    // Don't ever just plug values into a query!
-    //$query = "INSERT INTO stocks (symbol, course_code, current_price) "
-    //        . "VALUES ($symbol, $course_code, $current_price)";
-    // instead, use substitutions
-    $query = "INSERT INTO `section`(`id`, `course_code`, `faculty_id`, `semester`)"
-            . "VALUES (:id, :course_code, :faculty_id, :semester )";
+    
+    $query = "INSERT INTO `section`(`course_code`, `faculty_id`, `semester`)
+              VALUES (:course_code, :faculty_id, :semester )";
 
     // value binding in PDO protects against sql injection
     $statement = $database->prepare($query);
-    $statement->bindValue(":id", $section->get_id());
     $statement->bindValue(":course_code", $section->get_course_code());
     $statement->bindValue(":faculty_id", $section->get_faculty_id());
     $statement->bindValue(":semester", $section->get_semester());
@@ -136,14 +131,14 @@ function update_section($section) {
     $statement->closeCursor();
 }
 
-function delete_section($section) {
+function delete_section($id) {
     global $database;
 
     $query = "DELETE FROM section WHERE id = :id";
 
     // value binding in PDO protects against sql injection
     $statement = $database->prepare($query);
-    $statement->bindValue(":id", $section->get_id());
+    $statement->bindValue(":id", $id);
 
     $statement->execute();
 

@@ -2,42 +2,45 @@
 
 require_once 'models/database.php';
 require_once 'models/section.php';
+require_once 'models/course.php';
+require_once 'models/faculty.php';
 
 $action = htmlspecialchars(filter_input(INPUT_POST, "action"));
 
 
-$code = filter_input(INPUT_POST, "code");
-$name = htmlspecialchars(filter_input(INPUT_POST, "name"));
-$description = htmlspecialchars(filter_input(INPUT_POST, "description"));
-$credits = filter_input(INPUT_POST, "credits", FILTER_VALIDATE_FLOAT);
+$id = filter_input(INPUT_POST, "id", FILTER_VALIDATE_INT);
+$course_code = htmlspecialchars(filter_input(INPUT_POST, "course_code"));
+$faculty_id = filter_input(INPUT_POST, "faculty_id", FILTER_VALIDATE_INT);
+$semester = htmlspecialchars(filter_input(INPUT_POST, "semester"));
 
 
-if ($action == "insert_or_update" && $code != "" && $name != "" && $description != "" && $credits != 0) {
+if ($action == "insert_or_update" && $course_code != "" && $faculty_id != 0 && $semester != "") {
     $insert_or_update = filter_input(INPUT_POST, 'insert_or_update');
 
-    $course = new Course($code, $name, $description, $credits);
+    $section = new Section($id, $course_code, $faculty_id, $semester);
 
     if ($insert_or_update == "insert") {
-        insert_courses($course);
+        insert_sections($section);
     } else if ($insert_or_update == "update") {
-        update_course($course);
+        update_section($section);
     }
 
-    header("Location: course.php");
-} else if ($action == "delete" && $code != "") {
-    // name and current price don't matter for delete
-   $course = new Course($code, "", "", 0);
-    delete_course($course);
-    header("Location: course.php");
+    header("Location: section.php");
+    exit();
+} else if ($action == "delete" && $id != 0) {
+    delete_section($id);
+    header("Location: section.php");
     exit();
 } else if ($action != "") {
-    $error_message = "Missing code, name, description, or credits";
+    $error_message = "Missing course code, faculty ID, or semester.";
     include('views/error.php');
+    exit();
 }
 
 
-$courses = list_sections();
-
+$sections = list_sections();
+$courses = list_courses();
+$faculties = list_faculty();
 include ('views/section.php');
 //CRUD Create Update Read Delete
 

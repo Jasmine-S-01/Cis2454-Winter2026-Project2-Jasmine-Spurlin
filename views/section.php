@@ -47,7 +47,7 @@
         </br>
         <h2>Delete Section</h2>
         <form action="section.php" method="post"> 
-            <?php include("courseViewDropDown.php"); ?>
+            <?php include("sectionViewDropDown.php"); ?>
             <input type="hidden" name='action' value='delete'/>
             <label>&nbsp;</label>
             <input type="submit" value="Delete Section"/> 
