@@ -37,7 +37,7 @@ if ($action == "insert_or_update" && $student_id != "" && $section_id != 0 && $g
     exit();
 }
 
-$enrollment = list_enrollments();
+$enrollments = list_enrollments();
 $sections = list_sections();
 $students = list_students();
 include ('views/enrollment.php');

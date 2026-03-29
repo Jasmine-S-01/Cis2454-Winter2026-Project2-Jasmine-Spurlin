@@ -8,7 +8,7 @@ class enrollment {
         $this->set_id($id);
         $this->set_student_id($student_id);
         $this->set_section_id($section_id );
-       $this->set_grade($grade );
+        $this->set_grade($grade );
     }
 
     public function set_id($id) {
@@ -77,16 +77,15 @@ function list_enrollments() {
     // run the query please
     $statement->execute();
 
-    // this might be risky if you have HUGE amounts of data
-    $enrollment = $statement->fetchAll();
+    
+    $data = $statement->fetchAll();
 
     $statement->closeCursor();
 
     $enrollment_array = array();
 
-   foreach ($enrollment as $enrollment) {
- 
-        $enrollment_array[] = new Enrollment($enrollment['id'], $enrollment['student_id'], $enrollment['section_id'], $enrollment['grade']);
+   foreach ($data as $row) { // Loop through the raw data
+        $enrollment_array[] = new enrollment($row['id'], $row['student_id'], $row['section_id'], $row['grade']);
     }
 
     return $enrollment_array;

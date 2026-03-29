@@ -49,7 +49,7 @@
                 <th>Section Id</th>
                 <th>Grade</th>
             </tr>
-            <?php foreach ($enrollment as $enrollment) : ?>
+            <?php foreach ($enrollments as $enrollment) : ?>
                 <tr>
                     <td><?php echo $enrollment->get_id(); ?></td>
                     <td><?php echo $enrollment->get_student_id(); ?></td>
@@ -78,7 +78,7 @@
         </br>
         <h3>Delete/Drop Enrollment</h3>
         <form action="enrollment.php" method="post"> 
-            <?php include("sectionViewDropDown.php"); ?>
+            <?php include("enrollmentViewDropDown.php"); ?>
             <input type="hidden" name='action' value='delete'/>
             <label>&nbsp;</label>
             <input type="submit" value="Delete Section"/> 
