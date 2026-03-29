@@ -5,7 +5,6 @@
         <meta charset="UTF-8">
         <title>Course List</title>
     </head>
-     <h2>Navigation</h2>
     <?php include ('topNavigation.php'); ?>
     </br>
     <body>
