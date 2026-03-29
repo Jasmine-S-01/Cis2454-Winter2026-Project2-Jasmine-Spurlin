@@ -3,11 +3,13 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Stocks List</title>
+        <title>Course List</title>
     </head>
+     <h2>Navigation</h2>
     <?php include ('topNavigation.php'); ?>
     </br>
     <body>
+           <h2>Course List</h2>
         <table>
             <tr>
                 <th>Code</th>
@@ -53,5 +55,4 @@
         </form>
     </body>
     </br>
-    <?php include ('footer.php'); ?>
 </html>
