@@ -1,14 +1,14 @@
 <?php
 
 
-class students {
+class faculty {
 
-    private $id, $name, $major;
+    private $id, $name, $email;
 
-    public function __construct($name, $major, $id = 0) {
+    public function __construct($name, $email, $id = 0) {
         $this->set_id($id);
         $this->set_name($name);
-        $this->set_major($major);
+        $this->set_email($email);
     }
 
     public function set_id($id) {
@@ -23,8 +23,8 @@ class students {
         return $this->name;
     }
 
-    public function get_major() {
-        return $this->major;
+    public function get_email() {
+        return $this->email;
     }
 
 
@@ -32,17 +32,17 @@ class students {
         $this->name = $name;
     }
 
-    public function set_major($major) {
-        $this->major = $major;
+    public function set_email($email) {
+        $this->email = $email;
     }
 
 }
 
 
-function get_students($id){
+function get_faculty($id){
     global $database;
 
-    $query = 'SELECT name, major, id FROM students WHERE id = :id';
+    $query = 'SELECT name, email, id FROM faculty WHERE id = :id';
 
     // prepare the query please
     $statement = $database->prepare($query);
@@ -53,18 +53,18 @@ function get_students($id){
     $statement->execute();
 
     // this might be risky if you have HUGE amounts of data
-    $students = $statement->fetch();
+    $faculty = $statement->fetch();
     
     $statement->closeCursor();
     
-    return new User($students['name'], $students['major'], $students['id']);
+    return new User($faculty['name'], $faculty['email'], $faculty['id']);
     
 }
 
-function list_students() {
+function list_faculty() {
     global $database;
 
-    $query = 'SELECT name, major, id FROM students';
+    $query = 'SELECT name, email, id FROM faculty';
 
     // prepare the query please
     $statement = $database->prepare($query);
@@ -73,61 +73,61 @@ function list_students() {
     $statement->execute();
 
     // this might be risky if you have HUGE amounts of data
-    $students = $statement->fetchAll();
+    $faculty = $statement->fetchAll();
     
     $statement->closeCursor();
     
-    $students_array = array();
+    $faculty_array = array();
 
-    foreach ($students as $students) {
-        $students_array[] = new students($students['name'], $students['major'], $students['id']);
+    foreach ($faculty as $faculty) {
+        $faculty_array[] = new faculty($faculty['name'], $faculty['email'], $faculty['id']);
     }
 
-    return $students_array;
+    return $faculty_array;
 }
 
-function insert_students($students) {
+function insert_faculty($faculty) {
     global $database;
 
-    $query = "INSERT INTO students (name, major) "
-            . "VALUES (:name, :major)";
+    $query = "INSERT INTO faculty (name, email) "
+            . "VALUES (:name, :email)";
 
     // value binding in PDO protects against sql injection
     $statement = $database->prepare($query);
-    $statement->bindValue(":name", $students->get_name());
-    $statement->bindValue(":major", $students->get_major());
+    $statement->bindValue(":name", $faculty->get_name());
+    $statement->bindValue(":email", $faculty->get_email());
 
     $statement->execute();
 
     $statement->closeCursor();
 }
 
-function update_students($students) {
+function update_faculty($faculty) {
     global $database;
 
-    $query = "update students set name = :name, major = :major "
+    $query = "update faculty set name = :name, email = :email "
             . " where id = :id";
 
     // value binding in PDO protects against sql injection
     $statement = $database->prepare($query);
-    $statement->bindValue(":name", $students->get_name());
-    $statement->bindValue(":major", $students->get_major());
-    $statement->bindValue(":id", $students->get_id());
+    $statement->bindValue(":name", $faculty->get_name());
+    $statement->bindValue(":email", $faculty->get_email());
+    $statement->bindValue(":id", $faculty->get_id());
 
     $statement->execute();
 
     $statement->closeCursor();
 }
 
-function delete_students($students_id) {
+function delete_faculty($faculty_id) {
     global $database;
 
-    $query = "delete from students "
+    $query = "delete from faculty "
             . " where id = :id";
 
     // value binding in PDO protects against sql injection
     $statement = $database->prepare($query);
-    $statement->bindValue(":id", $students_id);
+    $statement->bindValue(":id", $faculty_id);
 
     $statement->execute();
 
