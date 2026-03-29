@@ -1,4 +1,4 @@
-<select name="symbol">
+<select name="code">
     <option value="">-- Select a Course --</option>
     <?php foreach ($courses as $course) : ?>
         <option value="<?php echo $course->get_code(); ?>">

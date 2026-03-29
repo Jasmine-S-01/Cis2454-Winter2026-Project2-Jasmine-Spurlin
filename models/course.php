@@ -139,8 +139,7 @@ function update_course($course) {
 function delete_course($course) {
     global $database;
 
-    $query = "delete from course "
-            . " where code = :code";
+    $query = "DELETE FROM course WHERE code = :code";
 
     // value binding in PDO protects against sql injection
     $statement = $database->prepare($query);

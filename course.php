@@ -29,6 +29,7 @@ if ($action == "insert_or_update" && $code != "" && $name != "" && $description 
    $course = new Course($code, "", "", 0);
     delete_course($course);
     header("Location: course.php");
+    exit();
 } else if ($action != "") {
     $error_message = "Missing code, name, description, or credits";
     include('views/error.php');
