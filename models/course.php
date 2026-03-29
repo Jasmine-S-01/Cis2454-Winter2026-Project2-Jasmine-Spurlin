@@ -135,7 +135,7 @@ function update_course($course) {
     $statement->closeCursor();
 }
 
-function delete_stock($course) {
+function delete_course($course) {
     global $database;
 
     $query = "delete from course "
@@ -143,7 +143,7 @@ function delete_stock($course) {
 
     // value binding in PDO protects against sql injection
     $statement = $database->prepare($query);
-    $statement->bindValue(":code", $course->get_symbol());
+    $statement->bindValue(":code", $course->get_code());
 
     $statement->execute();
 

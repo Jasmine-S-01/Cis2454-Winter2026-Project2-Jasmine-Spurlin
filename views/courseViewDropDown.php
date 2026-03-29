@@ -1,7 +1,11 @@
-<?php
-
-/* 
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHP.php to edit this template
- */
-
+<select name="symbol">
+    <option value="">-- Select a Course --</option>
+    <?php foreach ($courses as $course) : ?>
+        <option value="<?php echo $course->get_code(); ?>">
+            <?php 
+                // Joining the Code and Name together
+                echo $course->get_name() . " - " . $course->get_code(); 
+            ?>
+        </option>
+    <?php endforeach; ?>
+</select>
