@@ -24,7 +24,7 @@ try {
         delete_students($id);
         header("Location: students.php");
     } else if ($action != "") {
-        $error_message = "Missing name, or cash balance";
+        $error_message = "Missing name, major, or id";
         include('views/error.php');
     }
 
