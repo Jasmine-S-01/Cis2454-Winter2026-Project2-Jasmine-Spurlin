@@ -1,7 +1,44 @@
 <?php
 
-/* 
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHP.php to edit this template
- */
+require_once 'models/database.php';
+require_once 'models/section.php';
 
+$action = htmlspecialchars(filter_input(INPUT_POST, "action"));
+
+
+$code = filter_input(INPUT_POST, "code");
+$name = htmlspecialchars(filter_input(INPUT_POST, "name"));
+$description = htmlspecialchars(filter_input(INPUT_POST, "description"));
+$credits = filter_input(INPUT_POST, "credits", FILTER_VALIDATE_FLOAT);
+
+
+if ($action == "insert_or_update" && $code != "" && $name != "" && $description != "" && $credits != 0) {
+    $insert_or_update = filter_input(INPUT_POST, 'insert_or_update');
+
+    $course = new Course($code, $name, $description, $credits);
+
+    if ($insert_or_update == "insert") {
+        insert_courses($course);
+    } else if ($insert_or_update == "update") {
+        update_course($course);
+    }
+
+    header("Location: course.php");
+} else if ($action == "delete" && $code != "") {
+    // name and current price don't matter for delete
+   $course = new Course($code, "", "", 0);
+    delete_course($course);
+    header("Location: course.php");
+    exit();
+} else if ($action != "") {
+    $error_message = "Missing code, name, description, or credits";
+    include('views/error.php');
+}
+
+
+$courses = list_courses();
+
+include ('views/section.php');
+//CRUD Create Update Read Delete
+
+?>
