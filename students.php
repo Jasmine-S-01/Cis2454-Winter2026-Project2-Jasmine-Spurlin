@@ -24,7 +24,7 @@ try {
         delete_students($id);
         header("Location: students.php");
     } else if ($action != "") {
-        $error_message = "Missing name, major, or id";
+        $error_message = "Missing name, major, or Id.";
         include('views/error.php');
     }
 
